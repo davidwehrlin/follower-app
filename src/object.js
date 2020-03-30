@@ -1,40 +1,41 @@
 class Object {
-    constructor(x, y, c) {
+    constructor(game) {
+        this.game = game;
         this.pos = {
-            x: x,
-            y: y
+            x: 0,
+            y: 0
         }
-        this.c = c;
     }
 }
 
 class StaticObject extends Object{
-    constructor(x, y, c, w, h) {
-        super(x,y,c);
-        this.w = w;
-        this.h = h;
+    constructor(game, sprite) {
+        super(game);
+        this.sprite = sprite;
     }
+
     draw(ctx){
-        ctx.beginPath();
-        ctx.rect(this.pos.x, this.pos.y, this.w, this.h);
-        ctx.fillStyle = this.c;
-        ctx.fill();
+        ctx.drawImage(this.sprite, this.pos.x, this.pos.y);
     }
 }
 
+
+const radius = 15;
 class DynamicObject extends Object {
-    constructor(x, y, c, r) {
-        super(x,y,c);
-        this.r = r;
+    constructor(game, c) {
+        super(game);
+        this.c = c;
         this.dPos = {
             x: 0,
             y: 0
         }
-        this.speed = 5;
+        this.speed = 2;
+        this.radius = 15;
     }
+
     draw(ctx){
         ctx.beginPath();
-        ctx.arc(this.pos.x, this.pos.y, this.r, 0, 2 * Math.PI);
+        ctx.arc(this.pos.x, this.pos.y, this.radius, 0, 2 * Math.PI);
         ctx.fillStyle = this.c;
         ctx.fill();
     }
@@ -57,7 +58,6 @@ class DynamicObject extends Object {
     }
 
     update(deltaTime){
-        if (!deltaTime) return;
         this.pos.x += this.dPos.x;
         this.pos.y += this.dPos.y;
         this.dPos = {
