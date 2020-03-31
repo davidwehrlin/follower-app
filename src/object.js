@@ -5,6 +5,7 @@ class Object {
             x: 0,
             y: 0
         }
+        this.cell = [0, 0]
     }
 }
 
@@ -20,7 +21,6 @@ class StaticObject extends Object{
 }
 
 
-const radius = 15;
 class DynamicObject extends Object {
     constructor(game, c) {
         super(game);
@@ -30,7 +30,7 @@ class DynamicObject extends Object {
             y: 0
         }
         this.speed = 2;
-        this.radius = 15;
+        this.radius = 10; 
     }
 
     draw(ctx){
@@ -64,6 +64,8 @@ class DynamicObject extends Object {
             x: 0,
             y: 0
         }
+        this.cell[0] = Math.floor(this.dPos.x / this.game.GRID_SIZE);
+        this.cell[1] = Math.floor(this.dPos.y / this.game.GRID_SIZE);
     }
 }
 
