@@ -12,6 +12,23 @@ export default class Prey extends DynamicObject {
         this.pos.y = this.game.HEIGHT - 12.5;
     }
 
+    move(direction) {
+        switch(direction) {
+            case "up":
+                this.dPos.y -= this.speed;
+                break;
+            case "left":
+                this.dPos.x -= this.speed;
+                break;
+            case "down":
+                this.dPos.y += this.speed;
+                break;
+            case "right":
+                this.dPos.x += this.speed;
+                break;
+        }
+    }
+
     update(deltaTime, controller) {
         super.update(deltaTime);
         if (controller.keyState['w']) this.move("up");

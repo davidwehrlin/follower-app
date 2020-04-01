@@ -40,22 +40,7 @@ class DynamicObject extends Object {
         ctx.fill();
     }
 
-    move(direction) {
-        switch(direction) {
-            case "up":
-                this.dPos.y -= this.speed;
-                break;
-            case "left":
-                this.dPos.x -= this.speed;
-                break;
-            case "down":
-                this.dPos.y += this.speed;
-                break;
-            case "right":
-                this.dPos.x += this.speed;
-                break;
-        }
-    }
+    
 
     update(deltaTime){
         this.pos.x += this.dPos.x;

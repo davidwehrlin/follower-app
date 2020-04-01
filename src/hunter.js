@@ -3,8 +3,6 @@ import {DynamicObject} from '/src/object.js'
 
 export const SEARCH = {
     GREEDY: 0,
-    BFS: 1,
-    DFS: 2,
     ASTAR:3,
     NET: 4
 }
@@ -14,9 +12,6 @@ export default class Hunter extends DynamicObject {
         this.reset();
         this.scent = 0;
         this.algorithm = SEARCH.GREEDY;
-        this.queue = new TinyQueue([], (a, b) => {
-            a.val - b.val;
-        });
     }
 
     reset() {
@@ -26,35 +21,27 @@ export default class Hunter extends DynamicObject {
         };
     }
 
+    move(cell) {
+        this.pos.x = cell[0] * this.game.GRID_SIZE + this.game.GRID_SIZE / 2;
+        this.pos.y = cell[1] * this.game.GRID_SIZE + this.game.GRID_SIZE / 2;
+    }
+
     smell(prey) {
-        this.scent = (
-            Math.abs(prey.pos.x - this.pos.x) +
-            Math.abs(prey.pos.y - this.pos.y)
-        )
+        this.scent = Math.abs(prey.pos.x - this.pos.x);
+        this.scent += + Math.abs(prey.pos.y - this.pos.y);
+        return this.scent
     }
 
-    
     search() {
-        switch (this.algorithm) {
-            case SEARCH.GREEDY:
-                
-                this.queue.push({key: this.cell, value: this.scent});
-
-                break;
-        }
+        console.log("SEARCHING");
+        return [Math.floor(Math.random() * 32), Math.floor(Math.random() * 32)];
     }
-
-    chase() {
-
-    }
-
-    
 
     update(deltaTime, prey) {
         super.update(deltaTime);
         this.smell(prey);
-        //this.search();
-        this.chase();
+        let nextCell = this.search();
+        this.move(nextCell);
     }
 }
 
