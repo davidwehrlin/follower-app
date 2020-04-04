@@ -3,9 +3,16 @@ import {DynamicObject} from '/src/object.js'
 
 export const SEARCH = {
     GREEDY: 0,
-    ASTAR:3,
-    NET: 4
+    ASTAR: 1,
+    NET: 2
 }
+
+const STATE = {
+    SEARCHING: 0,
+    MOVING: 1,
+    WAITING: 2
+}
+
 export default class Hunter extends DynamicObject {
     constructor(game, c) {
         super(game, c);
@@ -16,9 +23,13 @@ export default class Hunter extends DynamicObject {
 
     reset() {
         this.pos = {
-            x: 12.5,
-            y: 12.5
+            x: 25,
+            y: 25
         };
+        this.cell = {
+            row: 0,
+            col: 0
+        }
     }
 
     move(cell) {
@@ -27,20 +38,19 @@ export default class Hunter extends DynamicObject {
     }
 
     smell(prey) {
-        this.scent = Math.abs(prey.pos.x - this.pos.x);
-        this.scent += + Math.abs(prey.pos.y - this.pos.y);
+        this.scent = Math.abs(prey.pos.x - this.pos.x); 
+        this.scent += Math.abs(prey.pos.y - this.pos.y);
         return this.scent
     }
 
-    search() {
-        console.log("SEARCHING");
-        return [Math.floor(Math.random() * 32), Math.floor(Math.random() * 32)];
+    search(board) {
+        return [0, 0];
     }
 
     update(deltaTime, prey) {
         super.update(deltaTime);
         this.smell(prey);
-        let nextCell = this.search();
+        let nextCell = this.search(this.game.board);
         this.move(nextCell);
     }
 }

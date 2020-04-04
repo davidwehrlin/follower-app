@@ -8,8 +8,15 @@ export default class Prey extends DynamicObject {
     }
 
     reset() {
-        this.pos.x = this.game.WIDTH - 12.5;
-        this.pos.y = this.game.HEIGHT - 12.5;
+        this.pos = {
+            x: this.game.WIDTH - this.game.GRID_SIZE / 2,
+            y: this.game.HEIGHT - this.game.GRID_SIZE / 2
+        }
+
+        this.cell = {
+            row: this.game.WIDTH / this.game.GRID_SIZE,
+            col: this.game.WIDTH / this.game.GRID_SIZE
+        }
     }
 
     move(direction) {
