@@ -55,8 +55,8 @@ export default class Physics {
         let vAB = AB.toVector(false);
         let vAC = line.toVector(false);
         let proj = vAB.projection(vAC);
+        let vAD = new Vector2d(vAC.x * proj, vAC.y * proj);
         if (proj >= 0) {
-            let vAD = new Vector2d(vAC.x * proj, vAC.y * proj);
             let dist = Math.sqrt(Math.pow(vAB.mag,2) - Math.pow(vAD.mag,2));
             if (dist < sphere.r) {
                 let DB = new Vector2d(vAB.x - vAD.x, vAB.y - vAD.y);
@@ -68,12 +68,7 @@ export default class Physics {
             }
         } else {
             if (vAB.mag < sphere.r) {
-                let m = AB.getSlope();
-                console.log(sphere.r, m);
-                let coef = Math.sqrt((Math.pow(sphere.r, 2)) / (1 + m));
-                let BE = [coef, m * coef];
-                
-                return [BE[0] - vAB.x, BE[1] - vAB.y];
+                return [vAD.x, vAD.y];
             } else {
                 return [0,0];
             }
@@ -83,6 +78,9 @@ export default class Physics {
 
     static checkCollision(game, board, object) {
         let cell = board.grid[object.cell.row * board.gridLen + object.cell.col];
+        if (cell == undefined){
+            console.log("Broke");
+        } 
         let neighbors = cell.getNeighbors(board);
         let lines = [];
         let cCorns = cell.getCorners(board);

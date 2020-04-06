@@ -59,8 +59,17 @@ class DynamicObject extends Thing {
             x: 0,
             y: 0
         }
+        if (this.pos.x > this.game.WIDTH) this.pos.x = this.game.WIDTH;
+        if (this.pos.y > this.game.HEIGHT) this.pos.y = this.game.HEIGHT;
+        if (this.pos.x < 0) this.pos.x = 0;
+        if (this.pos.y < 0) this.pos.y = 0;
+
         this.cell.col = Math.floor(this.pos.x / this.game.GRID_SIZE);
         this.cell.row = Math.floor(this.pos.y / this.game.GRID_SIZE);
+        if (this.cell.col > 15) this.cell.col = 15;
+        if (this.cell.row > 15) this.cell.row = 15;
+        if (this.cell.col < 0) this.cell.col = 0;
+        if (this.cell.row < 0) this.cell.row = 0;
     }
 }
 
