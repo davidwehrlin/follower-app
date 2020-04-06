@@ -1,4 +1,5 @@
-import {DynamicObject} from '/src/object.js'
+import {DynamicObject} from '/src/object.js';
+import Physics from "/src/physics.js";
 
 export default class Prey extends DynamicObject {
 
@@ -42,6 +43,8 @@ export default class Prey extends DynamicObject {
         if (controller.keyState['a']) this.move("left");
         if (controller.keyState['s']) this.move("down");
         if (controller.keyState['d']) this.move("right");
+        let correction = Physics.checkCollision(this.game, this.game.board, this);
+        Physics.handleCollision(this, correction);
      }
 }
 

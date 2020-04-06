@@ -1,5 +1,6 @@
 import { StaticObject } from "/src/object.js";
 
+const spritePercent = 0.15;
 class Cell {
     constructor(i, j) {
         this.row = i;
@@ -12,6 +13,17 @@ class Cell {
             s: true
         }
     }
+
+    getCorners(board) {
+        let ans = [];
+        let origin = [this.col * board.grdsz, this.row * board.grdsz];
+        ans.push(origin);
+        ans.push([origin[0] + board.grdsz, origin[1]]);
+        ans.push([origin[0] + board.grdsz, origin[1] + board.grdsz]);
+        ans.push([origin[0], origin[1] + board.grdsz]);
+        return ans;
+    }
+
     getNeighbors(board) {
         let ans = [];
         //calculations for array bounds
@@ -62,8 +74,8 @@ class Cell {
                 break;
         }
 
-        if (Math.random() < 0.25) {
-            let sprite = game.sprites[Math.floor(Math.random() * game.sprites.length)];
+        if (Math.random() < spritePercent) {
+            let sprite = game.sprites[1];
             neighbor.cell.object = new StaticObject(game, sprite)
         }
     }
@@ -72,15 +84,19 @@ class Cell {
 export default class Board {
     constructor(game) {
         this.game = game;
-        this.grid = [];
         this.gridLen = game.WIDTH / game.GRID_SIZE;
+        this.grdsz = game.GRID_SIZE;
+        this.grid = [];
+        this.reset();
+    }
+    reset() {
+        this.grid = [];
         for (let i = 0; i < this.gridLen; i++) {
             for (let j = 0; j < this.gridLen; j++) {
                 this.grid.push(new Cell(i, j));
             }
         }
         this.generateMaze();
-        console.log(this.grid)
     }
 
     generateMaze() {
@@ -98,11 +114,12 @@ export default class Board {
                 }
             }
         }
+        this.grid[this.grid.length - 1].object = null;
     }
 
     draw(ctx) {
         let grdsz = this.game.GRID_SIZE;
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = "#013220";
         ctx.lineWidth = 5;
         ctx.lineCap = "round";
         for (let i = 0; i < this.grid.length; i++) {
@@ -133,9 +150,5 @@ export default class Board {
             }
             if (cell.object != null) cell.object.draw(ctx, cell);
         }
-    }
-
-    update() {
-        //TODO
     }
 }

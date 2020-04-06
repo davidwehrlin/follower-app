@@ -59,8 +59,8 @@ class DynamicObject extends Thing {
             x: 0,
             y: 0
         }
-        this.cell[0] = Math.floor(this.dPos.x / this.game.GRID_SIZE);
-        this.cell[1] = Math.floor(this.dPos.y / this.game.GRID_SIZE);
+        this.cell.col = Math.floor(this.pos.x / this.game.GRID_SIZE);
+        this.cell.row = Math.floor(this.pos.y / this.game.GRID_SIZE);
     }
 }
 

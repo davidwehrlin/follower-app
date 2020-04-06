@@ -32,16 +32,23 @@ export default class Game {
             case GAMESTATE.MENU:
                 if (this.controller.keyState[' ']) {
                     this.gameState = GAMESTATE.PLAYING;
+                    this.board.reset();
+                    this.hunter.reset();
+                    this.prey.reset();
                 }
                 break;
             case GAMESTATE.BUILDING:
 
             case GAMESTATE.PLAYING:
-                //IF DONE GO TO MENU
+                
+                if (this.hunter.cell.row == this.prey.cell.row) {
+                    if (this.hunter.cell.col == this.prey.cell.col) {
+                        this.gameState = GAMESTATE.MENU;
+                    }
+                }
                 if (this.controller.keyState["Escape"]) {
                     this.gameState = GAMESTATE.PAUSED;
                 }
-                this.board.update(deltaTime);
                 this.hunter.update(deltaTime, this.prey);
                 this.prey.update(deltaTime, this.controller);
                 break;
@@ -68,8 +75,8 @@ export default class Game {
                     400);
                 break;
             case GAMESTATE.PLAYING:
-                //TODO: DRAW MAP
                 context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
+                context.drawImage(this.sprites[0],0,0,this.WIDTH, this.HEIGHT);
                 this.board.draw(context);
                 this.hunter.draw(context);
                 this.prey.draw(context);
