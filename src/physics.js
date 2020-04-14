@@ -68,7 +68,8 @@ export default class Physics {
             }
         } else {
             if (vAB.mag < sphere.r) {
-                return [vAD.x, vAD.y];
+                let scalar = 1 - (vAB.mag / sphere.r);
+                return [vAB.x * scalar, vAB.y * scalar];
             } else {
                 return [0,0];
             }

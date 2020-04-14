@@ -8,16 +8,21 @@ export default class Prey extends DynamicObject {
         this.reset();
     }
 
+    scent(x, y) {
+        let scent = Math.abs(x - this.pos.x); 
+        scent += Math.abs(y - this.pos.y);
+        return scent;
+    }
+
     reset() {
         this.pos = {
             x: this.game.WIDTH - this.game.GRID_SIZE / 2,
             y: this.game.HEIGHT - this.game.GRID_SIZE / 2
         }
-
-        this.cell = {
-            row: this.game.WIDTH / this.game.GRID_SIZE,
-            col: this.game.WIDTH / this.game.GRID_SIZE
-        }
+        let row = this.game.HEIGHT / this.game.GRID_SIZE;
+        let col = this.game.WIDTH / this.game.GRID_SIZE;
+        let index = row * this.game.gridLen + col;
+        this.cell = this.game.board.grid[index];
     }
 
     move(direction) {
