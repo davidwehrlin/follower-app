@@ -5,7 +5,10 @@ class Thing {
             x: 0,
             y: 0
         }
-        this.cell = this.game.board.grid[0];
+        this.cell = {
+            row: 0,
+            col: 0
+        }
     }
 }
 

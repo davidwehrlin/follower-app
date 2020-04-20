@@ -19,10 +19,10 @@ export default class Prey extends DynamicObject {
             x: this.game.WIDTH - this.game.GRID_SIZE / 2,
             y: this.game.HEIGHT - this.game.GRID_SIZE / 2
         }
-        let row = this.game.HEIGHT / this.game.GRID_SIZE;
-        let col = this.game.WIDTH / this.game.GRID_SIZE;
-        let index = row * this.game.gridLen + col;
-        this.cell = this.game.board.grid[index];
+        this.cell = {
+            row: 15,
+            col: 15
+        }
     }
 
     move(direction) {

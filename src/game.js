@@ -40,7 +40,6 @@ export default class Game {
             case GAMESTATE.BUILDING:
 
             case GAMESTATE.PLAYING:
-                
                 if (this.hunter.cell.row == this.prey.cell.row) {
                     if (this.hunter.cell.col == this.prey.cell.col) {
                         this.gameState = GAMESTATE.MENU;
