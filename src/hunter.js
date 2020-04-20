@@ -22,7 +22,7 @@ export default class Hunter extends DynamicObject {
         this.reset();
         this.prey = prey;
         this.scent = 0;
-        this.algorithm = SEARCH.GREEDY;
+        this.algorithm = SEARCH.BFS;
         this.time = 0;
         this.minHeap = new TinyQueue([], (a,b) => {
             return a.value - b.value;
@@ -95,7 +95,7 @@ export default class Hunter extends DynamicObject {
         if (this.prey.checkPowerUp()) {
             this.algorithm = SEARCH.WAIT;
         } else {
-            this.algorithm = SEARCH.GREEDY;
+            this.algorithm = SEARCH.BFS;
         }
         
     }

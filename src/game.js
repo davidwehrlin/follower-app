@@ -7,7 +7,7 @@ const GAMESTATE = {
     MENU: 0,
     PLAYING: 1,
     PAUSED: 2,
-    BUILDING: 3
+    WINNING: 3
 }
 
 
@@ -19,6 +19,7 @@ export default class Game {
         this.sprites = sprites;
         this.GRID_SIZE = 50;
         this.gameState = GAMESTATE.MENU;
+        this.time = 0
         
         this.board = new Board(this, sprites);
         this.prey = new Prey(this, "blue");
@@ -30,6 +31,7 @@ export default class Game {
     update(deltaTime) {
         switch (this.gameState) {
             case GAMESTATE.MENU:
+                this.time = 0;
                 if (this.controller.keyState[' ']) {
                     this.gameState = GAMESTATE.PLAYING;
                     this.board.reset();
@@ -40,9 +42,15 @@ export default class Game {
             case GAMESTATE.BUILDING:
 
             case GAMESTATE.PLAYING:
+                this.time += deltaTime;
                 if (this.hunter.cell.row == this.prey.cell.row) {
                     if (this.hunter.cell.col == this.prey.cell.col) {
                         this.gameState = GAMESTATE.MENU;
+                    }
+                }
+                if (this.prey.cell.row == 0) {
+                    if (this.prey.cell.col == 0) {
+                        this.gameState = GAMESTATE.WINNING;
                     }
                 }
                 if (this.controller.keyState["Escape"]) {
@@ -57,6 +65,15 @@ export default class Game {
                     this.gameState = GAMESTATE.PLAYING;
                 }
                 break;
+            case GAMESTATE.WINNING:
+                if (this.controller.keyState[' ']) {
+                    console.log(this.time / 1000.0);
+                    this.time = 0;
+                    this.gameState = GAMESTATE.PLAYING;
+                    this.board.reset();
+                    this.hunter.reset();
+                    this.prey.reset();
+                }
         }
         
     }
@@ -89,16 +106,16 @@ export default class Game {
                     this.WIDTH / 2, 
                     this.HEIGHT / 2); 
                 break;
+            case GAMESTATE.WINNING:
+                context.textAlign = "center";
+                context.font = "75px Arial";
+                context.fillStyle = "#00ff00";
+                context.fillText(
+                    "YOU WON.", 
+                    this.WIDTH / 2, 
+                    this.HEIGHT / 2); 
+                break;
         }
         
     }
-
-    reset() {
-
-    }
-
-    start() {
-
-    }
-    
 }

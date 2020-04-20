@@ -76,7 +76,7 @@ class Cell {
         }
 
         if (Math.random() < spritePercent) {
-            let sprite = game.sprites[1];
+            let sprite = game.sprites[0];
             neighbor.cell.object = new StaticObject(game, sprite)
         }
     }
@@ -101,7 +101,7 @@ export default class Board {
     }
 
     generateMaze() {
-        this.grid[0].object = new StaticObject(this.game, this.game.sprites[2]);
+        this.grid[0].object = new StaticObject(this.game, this.game.sprites[1]);
         let stack = [this.grid[0]];
         let visited = [stack[0]];
         while (stack.length > 0) {
