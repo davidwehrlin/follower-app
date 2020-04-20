@@ -21,8 +21,8 @@ export default class Game {
         this.gameState = GAMESTATE.MENU;
         
         this.board = new Board(this, sprites);
-        this.hunter = new Hunter(this, "red");
         this.prey = new Prey(this, "blue");
+        this.hunter = new Hunter(this, "red", this.prey);
         this.controller = new Controller(this.prey);
         
     }

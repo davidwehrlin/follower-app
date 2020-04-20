@@ -12,6 +12,7 @@ class Cell {
             w: true,
             s: true
         }
+        this.visited = false;
     }
 
     getCorners(board) {

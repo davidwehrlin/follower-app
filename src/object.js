@@ -39,7 +39,7 @@ class DynamicObject extends Thing {
             x: 0,
             y: 0
         }
-        this.speed = 2;
+        this.speed = 3;
         this.radius = 15;   
     }
 
@@ -63,7 +63,6 @@ class DynamicObject extends Thing {
         if (this.pos.y > this.game.HEIGHT) this.pos.y = this.game.HEIGHT;
         if (this.pos.x < 0) this.pos.x = 0;
         if (this.pos.y < 0) this.pos.y = 0;
-
         this.cell.col = Math.floor(this.pos.x / this.game.GRID_SIZE);
         this.cell.row = Math.floor(this.pos.y / this.game.GRID_SIZE);
         if (this.cell.col > 15) this.cell.col = 15;
