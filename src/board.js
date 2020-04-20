@@ -101,6 +101,7 @@ export default class Board {
     }
 
     generateMaze() {
+        this.grid[0].object = new StaticObject(this.game, this.game.sprites[2]);
         let stack = [this.grid[0]];
         let visited = [stack[0]];
         while (stack.length > 0) {
@@ -120,7 +121,7 @@ export default class Board {
 
     draw(ctx) {
         let grdsz = this.game.GRID_SIZE;
-        ctx.strokeStyle = "#013220";
+        ctx.strokeStyle = "#3e432e";
         ctx.lineWidth = 5;
         ctx.lineCap = "round";
         for (let i = 0; i < this.grid.length; i++) {

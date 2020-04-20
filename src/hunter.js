@@ -7,7 +7,6 @@ export const SEARCH = {
     ASTAR: 2,
     BFS: 3,
     DFS: 4,
-    WAIT: 5
 }
 
 export const MOVE = {
@@ -76,9 +75,6 @@ export default class Hunter extends DynamicObject {
             case SEARCH.ASTAR:
                 return aStarSearch(grid, this, this.minHeap)
                 break;
-            case SEARCH.WAIT:
-                return undefined;
-                break;
         }
         return randomSearch(grid, this);
     }
@@ -90,10 +86,12 @@ export default class Hunter extends DynamicObject {
         
         if (this.time > 500) {
             this.time = 0;
-            let nextCell = this.search(deltaTime, this.game.board.grid);
-            this.move(nextCell);
+            if (this.prey.checkPowerUp() == false) {
+                let nextCell = this.search(deltaTime, this.game.board.grid);
+                this.move(nextCell);
+            }
+            
         }
-        console.log(this.prey.checkPowerUp());
         if (this.prey.checkPowerUp()) {
             this.algorithm = SEARCH.WAIT;
         } else {

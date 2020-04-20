@@ -10,6 +10,7 @@ let ctx = canvas.getContext("2d");
 let sprites = [];
 sprites.push(document.getElementById("background"));
 sprites.push(document.getElementById("bush"));
+sprites.push(document.getElementById("chest"));
 
 let game = new Game(WIDTH, HEIGHT, sprites);
 let lastTime = 0;

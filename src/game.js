@@ -57,8 +57,6 @@ export default class Game {
                     this.gameState = GAMESTATE.PLAYING;
                 }
                 break;
-            
-
         }
         
     }
@@ -66,6 +64,7 @@ export default class Game {
     draw(context) {
         switch (this.gameState) {
             case GAMESTATE.MENU:
+                context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
                 context.textAlign = "center";
                 context.font = "50px Arial"
                 context.fillText(
@@ -75,7 +74,8 @@ export default class Game {
                 break;
             case GAMESTATE.PLAYING:
                 context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
-                context.drawImage(this.sprites[0],0,0,this.WIDTH, this.HEIGHT);
+                context.fillStyle = "#d7fbe8";
+                context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
                 this.board.draw(context);
                 this.hunter.draw(context);
                 this.prey.draw(context);
