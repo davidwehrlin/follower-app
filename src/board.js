@@ -1,6 +1,6 @@
 import { StaticObject } from "/src/object.js";
 
-const spritePercent = 0.15;
+const spritePercent = 0.05;
 class Cell {
     constructor(i, j) {
         this.row = i;

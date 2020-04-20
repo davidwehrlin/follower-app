@@ -1,6 +1,11 @@
 import {DynamicObject} from '/src/object.js';
 import Physics from "/src/physics.js";
 
+const POWERUP = {
+    NONE: 0,
+    BUSH: 1
+};
+
 export default class Prey extends DynamicObject {
 
     constructor(game, c) {
@@ -50,6 +55,16 @@ export default class Prey extends DynamicObject {
         if (controller.keyState['d']) this.move("right");
         let correction = Physics.checkCollision(this.game, this.game.board, this);
         Physics.handleCollision(this, correction);
+        let index = this.cell.col * this.game.board.gridLen + this.cell.row
+        this.game.board.grid[index].visited = false;
+     }
+
+     checkPowerUp() {
+        let index = this.cell.row * this.game.board.gridLen + this.cell.col
+        if (this.game.board.grid[index].object != null) {
+            return true;
+        };
+        return false;
      }
 }
 

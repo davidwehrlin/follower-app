@@ -1,5 +1,5 @@
 import {DynamicObject} from '/src/object.js'
-import {randomSearch, greedySearch} from '/src/algorithm.js'
+import {randomSearch, greedySearch, aStarSearch, breadthFirstSearch, depthFirstSearch} from '/src/algorithm.js'
 
 export const SEARCH = {
     RANDOM: 0,
@@ -7,7 +7,7 @@ export const SEARCH = {
     ASTAR: 2,
     BFS: 3,
     DFS: 4,
-    NET: 5
+    WAIT: 5
 }
 
 export const MOVE = {
@@ -28,6 +28,8 @@ export default class Hunter extends DynamicObject {
         this.minHeap = new TinyQueue([], (a,b) => {
             return a.value - b.value;
         });
+        this.stack = [];
+        this.queue = [];
     }
 
     reset() {
@@ -45,6 +47,7 @@ export default class Hunter extends DynamicObject {
     }
 
     move(cell) {
+        if (cell == undefined) return;
         this.pos.x = cell.col * this.game.GRID_SIZE + this.game.GRID_SIZE / 2;
         this.pos.y = cell.row * this.game.GRID_SIZE + this.game.GRID_SIZE / 2;
         
@@ -64,9 +67,17 @@ export default class Hunter extends DynamicObject {
             case SEARCH.GREEDY:
                 return greedySearch(grid, this, this.minHeap);
                 break;
-            case SEARCH.ASTAR:
+            case SEARCH.DFS:
+                return depthFirstSearch(grid, this, this.stack);
                 break;
-            case SEARCH.NET:
+            case SEARCH.BFS:
+                return breadthFirstSearch(grid, this, this.queue);
+                break;
+            case SEARCH.ASTAR:
+                return aStarSearch(grid, this, this.minHeap)
+                break;
+            case SEARCH.WAIT:
+                return undefined;
                 break;
         }
         return randomSearch(grid, this);
@@ -82,8 +93,12 @@ export default class Hunter extends DynamicObject {
             let nextCell = this.search(deltaTime, this.game.board.grid);
             this.move(nextCell);
         }
-        
-        
+        console.log(this.prey.checkPowerUp());
+        if (this.prey.checkPowerUp()) {
+            this.algorithm = SEARCH.WAIT;
+        } else {
+            this.algorithm = SEARCH.GREEDY;
+        }
         
     }
 }

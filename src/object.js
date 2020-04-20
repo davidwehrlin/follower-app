@@ -69,6 +69,7 @@ class DynamicObject extends Thing {
         if (this.cell.row > 15) this.cell.row = 15;
         if (this.cell.col < 0) this.cell.col = 0;
         if (this.cell.row < 0) this.cell.row = 0;
+        
     }
 }
 
