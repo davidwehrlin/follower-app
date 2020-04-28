@@ -79,11 +79,15 @@ export default class Game {
     }
 
     draw(context) {
+        
         switch (this.gameState) {
             case GAMESTATE.MENU:
                 context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
+                context.fillStyle = "white";
+                context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
+                context.fillStyle = "black"
                 context.textAlign = "center";
-                context.font = "50px Arial"
+                context.font = "75px Impact"
                 context.fillText(
                     "PRESS SPACEBAR TO PLAY", 
                     400, 
@@ -91,7 +95,7 @@ export default class Game {
                 break;
             case GAMESTATE.PLAYING:
                 context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
-                context.fillStyle = "#d7fbe8";
+                context.fillStyle = "white";
                 context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
                 this.board.draw(context);
                 this.hunter.draw(context);
@@ -99,7 +103,7 @@ export default class Game {
                 break;
             case GAMESTATE.PAUSED:
                 context.textAlign = "center";
-                context.font = "75px Arial";
+                context.font = "75px Impact";
                 context.fillStyle = "RED";
                 context.fillText(
                     "PAUSED", 

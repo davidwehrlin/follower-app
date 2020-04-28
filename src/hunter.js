@@ -4,9 +4,8 @@ import {randomSearch, greedySearch, aStarSearch, breadthFirstSearch, depthFirstS
 export const SEARCH = {
     RANDOM: 0,
     GREEDY: 1,
-    ASTAR: 2,
-    BFS: 3,
-    DFS: 4,
+    BFS: 2,
+    DFS: 3
 }
 
 export const MOVE = {

@@ -10,11 +10,11 @@ export default class Controller {
             'Escape': false
         };
 
-        document.addEventListener("keydown", (event) => {
+        $(document).keydown((event) => {
             this.keyState[event.key] = true;
         });
 
-        document.addEventListener("keyup", (event) => {
+        $(document).keyup((event) => {
             this.keyState[event.key] = false;
         });
     }

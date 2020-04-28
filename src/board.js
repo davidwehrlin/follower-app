@@ -121,7 +121,7 @@ export default class Board {
 
     draw(ctx) {
         let grdsz = this.game.GRID_SIZE;
-        ctx.strokeStyle = "#3e432e";
+        ctx.strokeStyle = "black";
         ctx.lineWidth = 5;
         ctx.lineCap = "round";
         for (let i = 0; i < this.grid.length; i++) {
