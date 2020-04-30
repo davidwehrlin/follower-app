@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
 
     <title>Hunt-AI</title>
     <img src="assets/bush.png" id="bush" style="display: none">
@@ -15,46 +14,50 @@
 
 <body>
 
-    <header class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <h1 class="display-3 text-center">Hunt-AI</h1>
-            </div>
-            <div class="col-md-6 text-center">
-                <button class="btn-lg btn-success" data-toggle="collapse" href="#collapseExample" role="button"
+    <header class="container-fluid border">
+        <div class="row" >
+            <div class="col">
+                <h1 class="display-3">Hunt-AI</h1>
+                <button class="btn-lg btn-success " data-toggle="collapse" href="#collapseExample" role="button"
                     aria-expanded="false" aria-controls="collapseExample">
-                    Learn to Play
+                    How to Play
                 </button>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                        proident.
-                    </div>
-                </div>
-                <button type="button" class="btn-lg btn-success d-inline ">Reset</button>
-                <div class="dropdown d-inline">
-                    <button class="btn-lg btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Choose an Algorithm
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Greedy</a>
-                        <a class="dropdown-item" href="#">BFS</a>
-                        <a class="dropdown-item" href="#">DFS</a>
-                        <a class="dropdown-item" href="#">Random</a>
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <canvas id="game"></canvas>
+            </div>
+            
+            <div class="col">
+                <h1 class="display-4">Game Options</h1>
+                <button id="reset" type="button" class="btn-lg btn-success m-2">Reset</button>
+                <div class="dropdown">
+                    <select id='algos' class="btn-lg btn-success m-2">
+                        <option value="0">Random</option>
+                        <option value="1">Greedy</option>
+                        <option value="2">BFS</option>
+                        <option value="3">DFS</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-md-3">
-                <h1 class="display-4 text-center">Leaderboards</h1>
+            <div class="col">
+                <h1 class="display-4">Leaderboards</h1>
             </div>
 
         </div>
+        <div class="row">
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    You are tasked with acquiring the treasure, however beware the hunter.
+                    Player = Red Circle
+                    Hunter = Blue Circle
+                    'w' = up
+                    'a' = left
+                    's' = down
+                    'd' = right
+                </div>
+            </div>
+        </div>
     </header>
+    <div style="text-align: center;">
+        <canvas id="game"></canvas>
+    </div>
     <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
