@@ -14,7 +14,7 @@
 
 <body>
 
-    <header class="container-fluid border">
+    <header class="container-fluid border text-center">
         <div class="row" >
             <div class="col">
                 <h1 class="display-3">Hunt-AI</h1>
@@ -22,17 +22,28 @@
                     aria-expanded="false" aria-controls="collapseExample">
                     How to Play
                 </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        Player = Blue Circle <br>
+                        Hunter = Red Circle <br>
+                        'w' = up <br>
+                        'a' = left <br>
+                        's' = down <br>
+                        'd' = right <br>
+                        Acquire the treasure at the end of the maze
+                    </div>
+                </div>
             </div>
             
             <div class="col">
                 <h1 class="display-4">Game Options</h1>
-                <button id="reset" type="button" class="btn-lg btn-success m-2">Reset</button>
-                <div class="dropdown">
+                <a href="#" id="reset" type="button" class="d-inline btn-lg btn-success m-2">Reset</a>
+                <div class="dropdown d-inline">
                     <select id='algos' class="btn-lg btn-success m-2">
-                        <option value="0">Random</option>
                         <option value="1">Greedy</option>
                         <option value="2">BFS</option>
                         <option value="3">DFS</option>
+                        <option value="0">Random</option>
                     </select>
                 </div>
             </div>
@@ -40,19 +51,6 @@
                 <h1 class="display-4">Leaderboards</h1>
             </div>
 
-        </div>
-        <div class="row">
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    You are tasked with acquiring the treasure, however beware the hunter.
-                    Player = Red Circle
-                    Hunter = Blue Circle
-                    'w' = up
-                    'a' = left
-                    's' = down
-                    'd' = right
-                </div>
-            </div>
         </div>
     </header>
     <div style="text-align: center;">

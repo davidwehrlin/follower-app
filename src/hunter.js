@@ -71,9 +71,6 @@ export default class Hunter extends DynamicObject {
             case SEARCH.BFS:
                 return breadthFirstSearch(grid, this, this.queue);
                 break;
-            case SEARCH.ASTAR:
-                return aStarSearch(grid, this, this.minHeap)
-                break;
         }
         return randomSearch(grid, this);
     }
@@ -85,18 +82,15 @@ export default class Hunter extends DynamicObject {
         
         if (this.time > 500) {
             this.time = 0;
-            if (this.prey.checkPowerUp() == false) {
-                let nextCell = this.search(deltaTime, this.game.board.grid);
-                this.move(nextCell);
-            }
-            
+            let nextCell = this.search(deltaTime, this.game.board.grid);
+            this.move(nextCell);
         }
         if (this.prey.checkPowerUp()) {
             this.algorithm = SEARCH.RANDOM;
         } else {
             this.algorithm = parseInt($("#algos")[0].value);
         }
-        console.log(this.algorithm);
+        
     }
 }
 

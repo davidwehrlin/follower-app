@@ -39,8 +39,6 @@ export default class Game {
                     this.prey.reset();
                 }
                 break;
-            case GAMESTATE.BUILDING:
-
             case GAMESTATE.PLAYING:
                 this.time += deltaTime;
                 if (this.hunter.cell.row == this.prey.cell.row) {
@@ -50,6 +48,7 @@ export default class Game {
                 }
                 if (this.prey.cell.row == 0) {
                     if (this.prey.cell.col == 0) {
+
                         this.gameState = GAMESTATE.WINNING;
                     }
                 }
@@ -75,6 +74,10 @@ export default class Game {
                     this.prey.reset();
                 }
         }
+        
+    }
+
+    handleWinning() {
         
     }
 
