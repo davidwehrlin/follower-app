@@ -13,11 +13,22 @@ const GAMESTATE = {
 
 
 export default class Game {
-    constructor (WIDTH, HEIGHT, sprites) {
-        this.WIDTH = WIDTH;
-        this.HEIGHT = HEIGHT;
+    constructor (canvas, sprites) {
+        this.canvas = canvas
+        this.context = canvas.getContext("2d");
+        if (window.innerHeight > window.innerWidth) {
+            canvas.width = 0.9 * window.innerWidth;
+        canvas.height = 0.9 * window.innerWidth;
+        } else {
+            canvas.width = 0.4 * window.innerWidth;
+            canvas.height = 0.4 * window.innerWidth;
+        }
+        
+        this.WIDTH = canvas.width;
+        this.HEIGHT = canvas.height; 
         this.sprites = sprites;
-        this.GRID_SIZE = 50;
+        this.gridLen = 16; //# of grid squares
+        this.GRID_SIZE = this.WIDTH / this.gridLen; //pixel size for a grid square
         this.gameState = GAMESTATE.MENU;
         this.time = 0
         
@@ -26,6 +37,15 @@ export default class Game {
         this.hunter = new Hunter(this, "red", this.prey);
         this.controller = new Controller(this.prey);
         
+    }
+
+    resize(WIDTH, HEIGHT) {
+        this.WIDTH = WIDTH;
+        this.HEIGHT = HEIGHT;
+        this.canvas.width = WIDTH;
+        this.canvas.height = HEIGHT;
+        this.GRID_SIZE = WIDTH / this.gridLen;
+        this.context = this.canvas.getContext("2d");
     }
 
     update(deltaTime) {
@@ -41,6 +61,7 @@ export default class Game {
                 break;
             case GAMESTATE.PLAYING:
                 this.time += deltaTime;
+                //Hunter cell == player cell so you lose
                 if (this.hunter.cell.row == this.prey.cell.row) {
                     if (this.hunter.cell.col == this.prey.cell.col) {
                         this.gameState = GAMESTATE.MENU;
@@ -48,7 +69,6 @@ export default class Game {
                 }
                 if (this.prey.cell.row == 0) {
                     if (this.prey.cell.col == 0) {
-
                         this.gameState = GAMESTATE.WINNING;
                     }
                 }
@@ -77,48 +97,47 @@ export default class Game {
         
     }
 
-    handleWinning() {
-        
-    }
 
-    draw(context) {
-        
+    draw() {
+        let fsz = Math.ceil(this.GRID_SIZE * 1.5);
         switch (this.gameState) {
             case GAMESTATE.MENU:
-                context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
-                context.fillStyle = "white";
-                context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
-                context.fillStyle = "black"
-                context.textAlign = "center";
-                context.font = "75px Impact"
-                context.fillText(
+                this.context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
+                this.context.fillStyle = "white";
+                this.context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
+                this.context.fillStyle = "black"
+                this.context.textAlign = "center";
+                
+                this.context.font = fsz.toString() + "px Impact"
+                this.context.fillText(
                     "PRESS SPACEBAR TO PLAY", 
-                    400, 
-                    400);
+                    this.HEIGHT / 2, 
+                    this.WIDTH / 2);
                 break;
             case GAMESTATE.PLAYING:
-                context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
-                context.fillStyle = "white";
-                context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
-                this.board.draw(context);
-                this.hunter.draw(context);
-                this.prey.draw(context);
+                this.context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
+                this.context.fillStyle = "white";
+                this.context.fillRect(0, 0, this.WIDTH, this.HEIGHT);
+                this.board.draw(this.context);
+                this.hunter.draw(this.context);
+                this.prey.draw(this.context);
                 break;
             case GAMESTATE.PAUSED:
-                context.textAlign = "center";
-                context.font = "75px Impact";
-                context.fillStyle = "RED";
-                context.fillText(
+                this.context.textAlign = "center";
+                
+                this.context.font = fsz.toString() + "px Impact"
+                this.context.fillStyle = "RED";
+                this.context.fillText(
                     "PAUSED", 
                     this.WIDTH / 2, 
                     this.HEIGHT / 2); 
                 break;
             case GAMESTATE.WINNING:
-                context.textAlign = "center";
-                context.font = "75px Arial";
-                context.fillStyle = "#00ff00";
-                context.fillText(
-                    "YOU WON.", 
+                this.context.textAlign = "center";
+                this.context.font = fsz.toString() + "px Impact"
+                this.context.fillStyle = "#00ff00";
+                this.context.fillText(
+                    "YOU WON!", 
                     this.WIDTH / 2, 
                     this.HEIGHT / 2); 
                 break;

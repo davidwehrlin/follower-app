@@ -61,16 +61,12 @@ export default class Hunter extends DynamicObject {
         switch(this.algorithm) {
             case SEARCH.RANDOM:
                 return randomSearch(grid, this);
-                break;
             case SEARCH.GREEDY:
                 return greedySearch(grid, this, this.minHeap);
-                break;
             case SEARCH.DFS:
                 return depthFirstSearch(grid, this, this.stack);
-                break;
             case SEARCH.BFS:
                 return breadthFirstSearch(grid, this, this.queue);
-                break;
         }
         return randomSearch(grid, this);
     }

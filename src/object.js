@@ -23,10 +23,10 @@ class StaticObject extends Thing{
         this.pos.y = cell.row * this.game.GRID_SIZE;
         ctx.drawImage(
             this.sprite, 
-            this.pos.x + 5, 
-            this.pos.y + 5, 
-            this.game.GRID_SIZE - 10, 
-            this.game.GRID_SIZE - 10);
+            this.pos.x, 
+            this.pos.y, 
+            this.game.GRID_SIZE, 
+            this.game.GRID_SIZE);
     }
 }
 
@@ -39,8 +39,8 @@ class DynamicObject extends Thing {
             x: 0,
             y: 0
         }
-        this.speed = 3;
-        this.radius = 15;   
+        this.speed = Math.floor(this.game.WIDTH / 250);
+        this.radius = this.game.GRID_SIZE / 2 - this.game.GRID_SIZE / 8;   
     }
 
     draw(ctx){
@@ -53,6 +53,7 @@ class DynamicObject extends Thing {
     
 
     update(deltaTime){
+        this.speed;
         this.pos.x += this.dPos.x;
         this.pos.y += this.dPos.y;
         this.dPos = {

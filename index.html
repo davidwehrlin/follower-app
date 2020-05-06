@@ -15,14 +15,14 @@
 <body>
 
     <header class="container-fluid border text-center">
-        <div class="row" >
+        <div class="row">
             <div class="col">
                 <h1 class="display-3">Hunt-AI</h1>
-                <button class="btn-lg btn-success " data-toggle="collapse" href="#collapseExample" role="button"
+                <a class="btn-lg btn-success " data-toggle="collapse" href="#collapseExample" role="button"
                     aria-expanded="false" aria-controls="collapseExample">
                     How to Play
-                </button>
-                <div class="collapse" id="collapseExample">
+                </a>
+                <div class="collapse m-3" id="collapseExample">
                     <div class="card card-body">
                         Player = Blue Circle <br>
                         Hunter = Red Circle <br>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col">
                 <h1 class="display-4">Game Options</h1>
                 <a href="#" id="reset" type="button" class="d-inline btn-lg btn-success m-2">Reset</a>
@@ -46,16 +46,22 @@
                         <option value="0">Random</option>
                     </select>
                 </div>
+                <div style="text-align: center;" class="m-2">
+                    <canvas id="game"></canvas>
+                </div>
             </div>
             <div class="col">
                 <h1 class="display-4">Leaderboards</h1>
+                <ol>
+                    <li>Player 1: 5000pts</li>
+                    <li>Player 2: 4000pts</li>
+                    <li>Player 3: 3000pts</li>
+                </ol>
             </div>
 
         </div>
     </header>
-    <div style="text-align: center;">
-        <canvas id="game"></canvas>
-    </div>
+    
     <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

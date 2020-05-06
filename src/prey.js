@@ -55,8 +55,6 @@ export default class Prey extends DynamicObject {
         if (controller.keyState['d']) this.move("right");
         let correction = Physics.checkCollision(this.game, this.game.board, this);
         Physics.handleCollision(this, correction);
-        let index = this.cell.col * this.game.board.gridLen + this.cell.row
-        this.game.board.grid[index].visited = false;
      }
 
      checkPowerUp() {
