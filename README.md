@@ -1,1 +1,1 @@
-# follower-app
+# Hunt-AI
